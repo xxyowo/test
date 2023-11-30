@@ -1,0 +1,90 @@
+C51 COMPILER V9.56.0.0   MOTOR                                                             12/05/2022 18:07:49 PAGE 1   
+
+
+C51 COMPILER V9.56.0.0, COMPILATION OF MODULE MOTOR
+OBJECT MODULE PLACED IN .\Objects\motor.obj
+COMPILER INVOKED BY: D:\Danpianji\c51\C51\BIN\C51.EXE motor.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT(.\Listin
+                    -gs\motor.lst) TABS(2) OBJECT(.\Objects\motor.obj)
+
+line level    source
+
+   1          #include"motor.h"
+   2          
+   3          sbit LED=P2^0;
+   4          sbit LSA=P2^2;
+   5          sbit LSB=P2^3;
+   6          sbit LSC=P2^4;
+   7          unsigned int timer;
+   8          unsigned int count_motor;
+   9          /*void delay(unsigned char i)
+  10          {
+  11            unsigned char j;
+  12            for(;i>0;i--)
+  13            for(j=0;j<125;j++);
+  14          }
+  15          
+  16          void Motor_Init()
+  17          {
+  18            EA=0;
+  19            TMOD=0x10; 
+  20            TH1=0xFF; //设定T1初值，每计数一次触发中断
+  21            TL1=0x1c;
+  22            
+  23            ET1=1; //开T1中断
+  24            TR1=1;//开定时器T1
+  25          
+  26            //外部中断
+  27            EX0=0;
+  28            IT0=0;//电平触发
+  29          }*/
+  30          
+  31          void Compare(unsigned int fan)
+  32          {
+  33   1        
+  34   1        if(timer<fan)
+  35   1        {
+  36   2          PWM=1;//PWM=1转动
+  37   2          LED=0;//LED=0灯亮
+  38   2        }
+  39   1        else
+  40   1        {
+  41   2          PWM=0;
+  42   2          LED=1;
+  43   2        }
+  44   1      }
+  45          /*
+  46          void display(unsigned int level)
+  47          {
+  48            unsigned char bit_table[] = {0x3f,0x06,0x5b,0x4f,0x66,0x6d,0x7d,0x07,0x7f,0x6f,0x80};
+  49            LSA=1;
+  50            LSB=1;
+  51            LSC=1;
+  52            P0=bit_table[level];
+  53            delay(1);
+  54          }*/
+C51 COMPILER V9.56.0.0   MOTOR                                                             12/05/2022 18:07:49 PAGE 2   
+
+  55          void zhuandong()
+  56          {
+  57   1        switch(count_motor)
+  58   1          {
+  59   2            case 0: Compare(50);break;
+  60   2            case 1: Compare(30);break;
+  61   2            case 2: Compare(75);break;
+  62   2            case 3: Compare(100);break;
+  63   2          }
+  64   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =     58    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =      4    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

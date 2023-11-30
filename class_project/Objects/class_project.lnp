@@ -1,0 +1,9 @@
+".\Objects\main.obj",
+".\Objects\DS18B20.obj",
+".\Objects\lcd.obj",
+".\Objects\password.obj",
+".\Objects\show_temp.obj",
+".\Objects\clock.obj",
+".\Objects\delay.obj" 
+TO ".\Objects\class_project" 
+PRINT(".\Listings\class_project.m51")
